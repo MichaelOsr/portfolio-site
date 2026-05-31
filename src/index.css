@@ -71,12 +71,19 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 4.5rem;
+    /* Root scroll container also clips so off-canvas glows never produce a
+       horizontal scrollbar on the smallest phones. */
+    overflow-x: clip;
   }
 
   body {
     @apply bg-background text-foreground;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+    /* Decorative glows are positioned off-canvas; clip horizontally so they
+       never trigger a sideways scroll on mobile. `clip` (not `hidden`) avoids
+       creating a scroll container, so the sticky navbar keeps working. */
+    overflow-x: clip;
   }
 
   @media (prefers-reduced-motion: reduce) {

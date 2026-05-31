@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { SocialLinks } from '@/components/common/SocialLinks'
 import { profile } from '@/data/profile'
 import { fadeUp, heroContainer } from '@/lib/animations'
+import { cn } from '@/lib/utils'
 
 const stats = [
   { value: '3+',  label: 'Years Experience' },
@@ -94,7 +95,7 @@ export function Hero() {
 
         <motion.h1
           variants={fadeUp}
-          className="text-6xl font-extrabold leading-[1.05] tracking-tight sm:text-7xl"
+          className="text-[clamp(2.75rem,13vw,4.5rem)] font-extrabold leading-[1.05] tracking-tight"
         >
           Michael
           <br />
@@ -126,17 +127,18 @@ export function Hero() {
           <SocialLinks links={profile.socials} className="ml-2" />
         </motion.div>
 
-        {/* Stats */}
-        <motion.div variants={fadeUp} className="mt-16 flex items-start gap-10 border-t pt-10">
+        {/* Stats — grid keeps columns within the viewport at any width. */}
+        <motion.div
+          variants={fadeUp}
+          className="mt-12 grid grid-cols-3 border-t pt-8 sm:mt-16 sm:pt-10"
+        >
           {stats.map(({ value, label }, i) => (
-            <div key={label} className="flex items-start gap-10">
-              <div>
-                <p className="text-4xl font-bold tabular-nums">{value}</p>
-                <p className="text-muted-foreground mt-1 text-sm">{label}</p>
-              </div>
-              {i < stats.length - 1 && (
-                <div className="bg-border mt-1 h-10 w-px self-start" aria-hidden="true" />
-              )}
+            <div
+              key={label}
+              className={cn('px-3 sm:px-5', i === 0 ? 'pl-0' : 'border-l')}
+            >
+              <p className="text-2xl font-bold tabular-nums sm:text-4xl">{value}</p>
+              <p className="text-muted-foreground mt-1 text-xs sm:text-sm">{label}</p>
             </div>
           ))}
         </motion.div>

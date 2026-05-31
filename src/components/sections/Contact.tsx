@@ -25,11 +25,12 @@ export function Contact() {
         viewport={{ once: true, margin: '-60px' }}
       >
         <motion.div variants={fadeUp} whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}>
-          <Button asChild size="lg">
+          <Button asChild size="lg" className="h-auto max-w-full py-2 whitespace-normal">
             <a
               href={`https://mail.google.com/mail/?view=cm&to=${profile.email}`}
               target="_blank"
               rel="noopener noreferrer"
+              className="break-all"
             >
               <Mail aria-hidden="true" />
               {profile.email}
